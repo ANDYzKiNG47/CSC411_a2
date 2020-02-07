@@ -23,10 +23,20 @@ Uarray2 Checklist:
 - [ ] *What examples do you have of what the functions are supposed to do?*
 	* 
 - [ ] *What representation will you use, and what invariants will it satisfy?*
+	* We will use Hanson arrays to implemt our 2d Array. Which is either
+		* a Null pointer
+		* a pointer p to an array of pointers p->1, p->2, ..., p->n to other hanson arrays.
+			* Either p->1 is null or p->1 is of size n where n is the width    
 - [ ] *When a representation satisfies all invariants, what abstract thing from
-step [<-] does it represent?*
+step [<-] does it represent?* 
+	* the NULL pointer represents an empty image
+	* a nonnull pointer p represents a bitmap image
 - [ ] *What test cases have you devised?*
+	* Test cases are left as an exercise in creativity for the reader
 - [ ] *What programming idioms will you need?*
+	* The idioms for pointers and storing values in an unboxed array
+	* The idiom for Allocating memory
+	
 
 Bit2 Checklist:
 
