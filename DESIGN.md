@@ -56,15 +56,18 @@ functions must meet?*
 the function travels to the neighbors of the original black edge pixel, and flips the bit to remove the black pixel
     * extern Bit2\_T pbmread(const char\* path); reads a pbm file into a Bit2\_T struct
     * extern void pbmwrite(FILE \*fp, Bit2\_T bitmap); writes a Bit2\_T struct to a pbm file. creates a pbm file if one does not exist
-
 - [ ] *What examples do you have of what the functions are supposed to do?*
     * .gitignore
 - [ ] *What representation will you use, and what invariants will it satisfy?*
     * We will use an array of pointers to bit vectors to represent a pbm image.
-    * Invarient: All values in bit vectors are 1 or 0, and the demensions of the bit2_t will never change after initialized or until freed
+    * Invarient: All values in bit vectors are 1 or 0, and the demensions of the bit2\_t will never change after initialized or until freed
 - [ ] *When a representation satisfies all invariants, what abstract thing from
 step [<-] does it represent?*
+	* A null pointer will represent an empty image
+	* A nonnull pointer will represent a 2d array of bits that are either 1 or 0
 - [ ] *What test cases have you devised?*
     * Test cases are left as an exercise in creativity for the reader
-
 - [ ] *What programming idioms will you need?*
+	* The idioms for unboxed arrays
+	* The idiom for handling void pointers
+
