@@ -14,9 +14,9 @@ Uarray2 Checklist:
 	* extern int UArray2\_height(UArray2\_T arr); returns the height of the array
 	* extern int UArray2\_size(UArray2\_T arr); returns the size of the elements stored in the nested arrays. 
 	* extern void\* UArray2\_get(UArray2\_T arr, int row, int column); returns a void pointer to an elements at (row,column)
-	* extern void UArray2\_map\_row\_major(UArray2\_T arr,void apply(UArray2\_T arr, int row, int column, void\* elem, void\* cl), void\* cl); map functions iterate through 2D array and performs apply function on each element. -1 can be passed  to apply for row and column if not needed
-	*  extern void UArray2\_map\_col\_major(UArray2\_T arr, void apply(UArray2\_T arr, int row, int column, void\* elem, void\* cl), void\* cl); iterates through 2D array column by column and applies function to each element
-	* extern void UArray2\_map\_block\_major(UArray2\_T arr, void apply(UArray2\_T arr, int row, int column, void\* elem, void\* cl), void\* cl); iterates through the array in blocks of sqrt(n) x sqrt(n)
+	* extern void UArray2\_map\_row\_major(UArray2\_T arr,void apply(UArray2\_T arr, int\* row, int\* column, void\* elem, void\* cl), void\* cl); map functions iterate through 2D array and performs apply function on each element. NULL can be passed  to apply for row and column if not needed
+	*  extern void UArray2\_map\_col\_major(UArray2\_T arr, void apply(UArray2\_T arr, int\* row, int\* column, void\* elem, void\* cl), void\* cl); iterates through 2D array column by column and applies function to each element
+	* extern void UArray2\_map\_block\_major(UArray2\_T arr, void apply(UArray2\_T arr, int\* row, int\* column, void\* elem, void\* cl), void\* cl); iterates through the array in blocks of sqrt(n) x sqrt(n)
 
 	These functions make it clear that UArray2 is a mutable abstraction
 

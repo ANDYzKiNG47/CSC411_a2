@@ -26,10 +26,10 @@ extern void Bit2_map_col_major(Bit2_T bit2,
 // looks for a black edge pixel starting with the top left of the image
 // returns 0 if no black edges are found
 extern int Bit2_find_black_edge_pixel(Bit2_T bit2, int* row, int* column, void* cl);
-// can be given a starting row and column of a black edge or -1 if one is not known
+// can be given a starting row and column of a black edge or NULL if one is not known
 // similar to a path finding algorithm, the function follows the black edges
 // of the image, and flips the bit to remove the black pixel
-extern int Bit2_unblack_edges(Bit2_T bit2, int row, int column, void* cl);
+extern int Bit2_unblack_edges(Bit2_T bit2, int* row, int* column, void* cl);
 // auxilary functions
 // 
 // reads a pbm file into a Bit2_T struct
