@@ -24,7 +24,8 @@ Uarray2 Checklist:
 	* 
 - [ ] *What representation will you use, and what invariants will it satisfy?*
 	* We will use Hanson arrays to implemt our 2d Array. Which is either.
-		*
+		* a Null pointer
+		* a pointer p 
 - [ ] *When a representation satisfies all invariants, what abstract thing from
 step [<-] does it represent?*
 - [ ] *What test cases have you devised?*
