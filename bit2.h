@@ -5,7 +5,7 @@
 typedef struct Bit2_T* Bit2_T;
 // creates an array of height bit vectors, width long
 extern Bit2_T Bit2_new(int width, int height);
-// interates through array and frees bit vectors
+// iterates through array and frees bit vectors
 // then frees array
 extern void Bit2_free(Bit2_T* bit2);
 // returns the value of a bit at (row, column)
