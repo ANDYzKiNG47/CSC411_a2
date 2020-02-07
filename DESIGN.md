@@ -23,13 +23,20 @@ Uarray2 Checklist:
 - [ ] *What examples do you have of what the functions are supposed to do?*
 	* 
 - [ ] *What representation will you use, and what invariants will it satisfy?*
-	* We will use Hanson arrays to implemt our 2d Array. Which is either.
+	* We will use Hanson arrays to implemt our 2d Array. Which is either
 		* a Null pointer
-		* a pointer p 
+		* a pointer p to an array of pointers p->1, p->2, ..., p->n to other hanson arrays.
+			* Either p->1 is null or p->1 is of size n where n is the width    
 - [ ] *When a representation satisfies all invariants, what abstract thing from
-step [<-] does it represent?*
+step [<-] does it represent?* 
+	* the NULL pointer represents an empty image
+	* a nonnull pointer p represents a bitmap image
 - [ ] *What test cases have you devised?*
+	* Test cases are left as an exercise in creativity for the reader
 - [ ] *What programming idioms will you need?*
+	* The idioms for pointers and storing values in an unboxed array
+	* The idiom for Allocating memory
+	
 
 Bit2 Checklist:
 
@@ -37,9 +44,6 @@ Bit2 Checklist:
 	* A high resolution scan stored as a bitmap.
 - [ ] *What functions will you offer, and what are the contracts of that those
 functions must meet?* 
-	* extern Bit2\_T Bit2\_new(int width, int height); creates an array of height bit vectors, width long 
-	* extern void Bit2\_free(Bit2\_T\* bit2); interates through array and frees bit vectors then frees the array
-	* 
 - [ ] *What examples do you have of what the functions are supposed to do?*
 - [ ] *What representation will you use, and what invariants will it satisfy?*
 - [ ] *When a representation satisfies all invariants, what abstract thing from
