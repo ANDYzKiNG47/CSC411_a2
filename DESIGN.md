@@ -31,6 +31,7 @@ Uarray2 Checklist:
 step [<-] does it represent?* 
 	* the NULL pointer represents an empty image
 	* a nonnull pointer p represents a bitmap image
+    * Invarient: Demensions of the Uarray2_T will never change after initialized or until freed
 - [ ] *What test cases have you devised?*
 	* Test cases are left as an exercise in creativity for the reader
 - [ ] *What programming idioms will you need?*
@@ -57,8 +58,13 @@ the function travels to the neighbors of the original black edge pixel, and flip
     * extern void pbmwrite(FILE \*fp, Bit2\_T bitmap); writes a Bit2\_T struct to a pbm file. creates a pbm file if one does not exist
 
 - [ ] *What examples do you have of what the functions are supposed to do?*
+    * .gitignore
 - [ ] *What representation will you use, and what invariants will it satisfy?*
+    * We will use an array of pointers to bit vectors to represent a pbm image.
+    * Invarient: All values in bit vectors are 1 or 0, and the demensions of the bit2_t will never change after initialized or until freed
 - [ ] *When a representation satisfies all invariants, what abstract thing from
 step [<-] does it represent?*
-- [ ] *What test cases have you devised?* 
+- [ ] *What test cases have you devised?*
+    * Test cases are left as an exercise in creativity for the reader
+
 - [ ] *What programming idioms will you need?*
