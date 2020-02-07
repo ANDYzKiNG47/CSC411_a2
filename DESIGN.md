@@ -23,6 +23,8 @@ Uarray2 Checklist:
 - [ ] *What examples do you have of what the functions are supposed to do?*
 	* 
 - [ ] *What representation will you use, and what invariants will it satisfy?*
+	* We will use Hanson arrays to implemt our 2d Array. Which is either.
+		*
 - [ ] *When a representation satisfies all invariants, what abstract thing from
 step [<-] does it represent?*
 - [ ] *What test cases have you devised?*
@@ -34,6 +36,9 @@ Bit2 Checklist:
 	* A high resolution scan stored as a bitmap.
 - [ ] *What functions will you offer, and what are the contracts of that those
 functions must meet?* 
+	* extern Bit2\_T Bit2\_new(int width, int height); creates an array of height bit vectors, width long 
+	* extern void Bit2\_free(Bit2\_T\* bit2); interates through array and frees bit vectors then frees the array
+	* 
 - [ ] *What examples do you have of what the functions are supposed to do?*
 - [ ] *What representation will you use, and what invariants will it satisfy?*
 - [ ] *When a representation satisfies all invariants, what abstract thing from
