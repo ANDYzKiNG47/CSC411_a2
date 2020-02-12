@@ -31,15 +31,15 @@ void Bit2_free(Bit2_T* bit2){
 
 int Bit2_get(Bit2_T* bit2, int row, int column){
     
-    Bit_T bitv = Array_get(bit2->arr, row);
-    int elem = Bit_get(bitv, column);
+    Bit_T *bitv = Array_get(bit2->arr, row);
+    int elem = Bit_get(*bitv, column);
     return elem;  
 }
 
 void Bit2_put(Bit2_T* bit2, int row, int column, int value){
 
-    Bit_T bitv = Array_get(bit2->arr, row);
-    int prev = Bit_put(bitv, column, value);
+    Bit_T *bitv = Array_get(bit2->arr, row);
+    int prev = Bit_put(*bitv, column, value);
     (void) prev;
 }
 
@@ -83,10 +83,10 @@ Bit2_T* pbmread(FILE* input){
     Bit2_T* bit2 = Bit2_new(pgmData.width, pgmData.height);
     int len = pgmData.width * pgmData.height;
     for (int i = 0; i < len; ++i){
-        int r = i / pgmData.height;
+        int r = i / (pgmData.height-1);
         int c = i % pgmData.width;
         int pixel = (int) Pnmrdr_get(pgmReader);
-        Bit2_put(bit2, r, c, pixel);
+	Bit2_put(bit2, r, c, pixel);
     }
     Pnmrdr_free(&pgmReader);
 
@@ -94,17 +94,13 @@ Bit2_T* pbmread(FILE* input){
 }
 
 void Bit2_print(Bit2_T* bit2){
-    
+    printf("P1\n");
+    printf("%d %d\n", bit2->width, bit2->height);
     for (int i = 0; i < bit2->height; ++i){
-        Bit_T bitv = Array_get(bit2->arr, i);
         for (int j = 0; j < bit2->width; ++j){
-            int bit = Bit_get(bitv, j);
+            int bit = Bit2_get(bit2, i, j);
             printf("%d", bit);
-            if (j != bit2->width - 1)
-                printf(" ");
         }
-        if (i != bit2->height -1)
-            printf("\n");
     }
 }
 
