@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <array.h>
+#include "pnmrdr.h"
 
 typedef struct UArray2_T UArray2_T;
 
@@ -42,7 +43,9 @@ void UArray2_map_col_major(UArray2_T* arr, apply_func apply, void* cl);
 
 // iterates through the array in blocks of sqrt(n) x sqrt(n)
 // can only be used is n is a perfect square
-void UArray2_map_block_major(UArray2_T* arr,
-        void apply(UArray2_T* arr, int row, int column, void* elem, void* cl), void* cl);
+void UArray2_map_block_major(UArray2_T* arr, apply_func apply, void* cl);
+
+// reads pgm file into a UArray2_T
+UArray2_T* UArray2_readPGM(FILE* input);
 
 #endif

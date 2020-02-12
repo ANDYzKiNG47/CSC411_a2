@@ -75,65 +75,73 @@ void UArray2_map_block_major(UArray2_T* arr, apply_func apply, void* cl){
     
     if (arr->height != 9 || arr->width != 9)
         return;
-    
-    //sorry for ugly code. didn't feel like doing it the hard way 
-    for (int i = 0; i < 3; ++i){
-        for (int j = 0; j < 3; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
+
+    int j_idx = 0;
+    for (int k = 0; k < 3; ++k){
+        for (int i = 0; i < 3; ++i){
+            for (int j = j_idx; j < j_idx + 3; ++j){
+                void* e = UArray2_get(arr, i, j);
+                apply(arr, i, j, e, cl);
+            }
         }
+        j_idx += 3;
     }
-    for (int i = 0; i < 3; ++i){
-        for (int j = 3; j < 6; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
+
+    j_idx = 0;
+    for (int k = 0; k < 3; ++k){
+        for (int i = 3; i < 6; ++i){
+            for (int j = j_idx; j < j_idx + 3; ++j){
+                void* e = UArray2_get(arr, i, j);
+                apply(arr, i, j, e, cl);
+            }
         }
+        j_idx += 3;
     }
-    for (int i = 0; i < 3; ++i){
-        for (int j = 6; j < 9; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
+
+    j_idx = 0;
+    for (int k = 0; k < 3; ++k){
+        for (int i = 6; i < 9; ++i){
+            for (int j = j_idx; j < j_idx + 3; ++j){
+                void* e = UArray2_get(arr, i, j);
+                apply(arr, i, j, e, cl);
+            }
         }
-    }
-    for (int i = 3; i < 6; ++i){
-        for (int j = 0; j < 3; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
-        }
-    }
-    for (int i = 3; i < 6; ++i){
-        for (int j = 3; j < 6; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
-        }
-    }
-    for (int i = 3; i < 6; ++i){
-        for (int j = 6; j < 9; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
-        }
-    }
-    for (int i = 6; i < 9; ++i){
-        for (int j = 0; j < 3; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
-        }
-    }
-    for (int i = 6; i < 9; ++i){
-        for (int j = 3; j < 6; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
-        }
-    }
-    for (int i = 6; i < 9; ++i){
-        for (int j = 6; j < 9; ++j){
-            void* e = UArray2_get(arr, i, j);
-            apply(arr, i, j, e, cl);
-        }
+        j_idx += 3;
     }
 }
 
+UArray2_T* UArray2_readPGM(FILE* input){
+    
+    if (input == NULL){
+        fprintf(stderr, "Error: Invalid file");
+        exit(1);
+    }
 
+    void* pgmReader = Pnmrdr_new(input);
+    Pnmrdr_mapdata pgmData = Pnmrdr_data(pgmReader);
+    
+    if (pgmData.type != Pnmrdr_gray){
+        fprintf(stderr, "Error: Invalid image type");
+        Pnmrdr_free(pgmReader);
+        exit(1);
+    }
+    
+    UArray2_T* arr = Uarray2_new(pgmData.height, pgmData.width, sizeof(int));
+    int len = arr->width * arr->height;
+    printf("height: %d width: %d\n", pgmData.height, pgmData.width);
+    for (int i = 0; i < len; ++i){
+        int r = i / 9;
+        int c = i % 9;
+        printf("row: %d column: %d\n", r,c);
+        int pixel = (int) Pnmrdr_get(pgmReader);
+        printf("pixel: %d\n", pixel);
+        int* e = UArray2_get(arr, r, c);
+        *e = pixel;
+    }
+    Pnmrdr_free(pgmReader);
+
+    return arr;
+}
 
 
 
