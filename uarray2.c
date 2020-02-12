@@ -113,7 +113,7 @@ void UArray2_map_block_major(UArray2_T* arr, apply_func apply, void* cl){
 UArray2_T* UArray2_readPGM(FILE* input){
     
     if (input == NULL){
-        fprintf(stderr, "Error: Invalid file");
+        fprintf(stderr, "Error: Invalid file\n");
         exit(1);
     }
 
@@ -121,7 +121,7 @@ UArray2_T* UArray2_readPGM(FILE* input){
     Pnmrdr_mapdata pgmData = Pnmrdr_data(pgmReader);
     
     if (pgmData.type != Pnmrdr_gray){
-        fprintf(stderr, "Error: Invalid image type");
+        fprintf(stderr, "Error: Invalid image type\n");
         Pnmrdr_free(&pgmReader);
         exit(1);
     }

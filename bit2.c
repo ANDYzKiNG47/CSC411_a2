@@ -64,29 +64,48 @@ void Bit2_map_col_major(Bit2_T* bit2, apply_func apply, void* cl){
     }
 }
 
-int Bit2_find_black_edge_pixel(Bit2_T* bit2, int* row, int* column, void* cl){
-    (void) bit2;
-    (void) row;
-    (void) column;
-    (void) cl;
-    return 0;
+Bit2_T* pbmread(FILE* input){
+    
+    if (input == NULL){
+        fprintf(stderr, "Error: Invalid file\n");
+        exit(1);
+    }
+
+    Pnmrdr_T pgmReader = Pnmrdr_new(input);
+    Pnmrdr_mapdata pgmData = Pnmrdr_data(pgmReader);
+    
+    if (pgmData.type != Pnmrdr_bit){
+        fprintf(stderr, "Error: Invalid image type\n");
+        Pnmrdr_free(&pgmReader);
+        exit(1);
+    }
+
+    Bit2_T* bit2 = Bit2_new(pgmData.width, pgmData.height);
+    int len = pgmData.width * pgmData.height;
+    for (int i = 0; i < len; ++i){
+        int r = i / pgmData.height;
+        int c = i % pgmData.width;
+        int pixel = (int) Pnmrdr_get(pgmReader);
+        Bit2_put(bit2, r, c, pixel);
+    }
+    Pnmrdr_free(&pgmReader);
+
+    return bit2;
 }
 
-int Bit2_unblack_edges(Bit2_T* bit2, int* row, int* column, void* cl){
-    (void) bit2;
-    (void) row;
-    (void) column;
-    (void) cl;
-    return 0;   
-}
-
-Bit2_T* pbmread(const char* path){
-    (void) path;
-    return NULL;
-}
-void pbmwrite(FILE *fp, Bit2_T* bitmap){
-    (void) fp;
-    (void) bitmap;    
+void Bit2_print(Bit2_T* bit2){
+    
+    for (int i = 0; i < bit2->height; ++i){
+        Bit_T bitv = Array_get(bit2->arr, i);
+        for (int j = 0; j < bit2->width; ++j){
+            int bit = Bit_get(bitv, j);
+            printf("%d", bit);
+            if (j != bit2->width - 1)
+                printf(" ");
+        }
+        if (i != bit2->height -1)
+            printf("\n");
+    }
 }
 
 
