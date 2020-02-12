@@ -18,12 +18,14 @@ int main(int argc, char** argv){
         exit(1);
     }
     uarr2 = UArray2_readPGM(input);
+    fclose(input);
     int* cl = calloc(10, sizeof(int)*10);
     UArray2_map_row_major(uarr2, apply, cl);
     UArray2_map_col_major(uarr2, apply, cl);
     UArray2_map_block_major(uarr2, apply, cl);
  
     free(cl);
+    UArray2_free(uarr2);
 
     return 0;
 }

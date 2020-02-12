@@ -117,12 +117,12 @@ UArray2_T* UArray2_readPGM(FILE* input){
         exit(1);
     }
 
-    void* pgmReader = Pnmrdr_new(input);
+    Pnmrdr_T pgmReader = Pnmrdr_new(input);
     Pnmrdr_mapdata pgmData = Pnmrdr_data(pgmReader);
     
     if (pgmData.type != Pnmrdr_gray){
         fprintf(stderr, "Error: Invalid image type");
-        Pnmrdr_free(pgmReader);
+        Pnmrdr_free(&pgmReader);
         exit(1);
     }
     
@@ -135,7 +135,7 @@ UArray2_T* UArray2_readPGM(FILE* input){
         int* e = UArray2_get(arr, r, c);
         *e = pixel;
     }
-    //Pnmrdr_free(pgmReader);
+    Pnmrdr_free(&pgmReader);
 
     return arr;
 }
