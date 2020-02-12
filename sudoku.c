@@ -33,7 +33,7 @@ void clearArray(int* arr, int size){
     }
 }
 // first element of cl stores count
-// resets when count == 8 (iterations)
+// resets when count == 9 (iterations)
 // exits if any duplicates are found
 // resets closure if no duplicates are found and continues 
 void apply(UArray2_T* arr, int row, int col, void* elem, void* cl){
@@ -44,15 +44,16 @@ void apply(UArray2_T* arr, int row, int col, void* elem, void* cl){
 
     int* check = (int*) cl;
     int* e = (int*) elem;
-    
+
     if (check[*e] != 0){
+        fprintf(stderr, "Invalid sudoku\n");
         exit(1);
     }else{
         check[*e] = *e;
         check[0] += 1;
     }
 
-    if (check[0] == 8){
+    if (check[0] == 9){
         clearArray(check, 10);
     }
 

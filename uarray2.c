@@ -13,7 +13,7 @@ UArray2_T* Uarray2_new(int width, int height, int size){
     uarr2->width = width;
     uarr2->height = height;
     uarr2->size = size;
-    uarr2->matrix = Array_new(height, size);
+    uarr2->matrix = Array_new(height, sizeof(Array_T*));
     for (int i = 0; i < height; ++i){
         Array_T* p = Array_get(uarr2->matrix, i);
         *p = Array_new(width, size);
@@ -126,19 +126,16 @@ UArray2_T* UArray2_readPGM(FILE* input){
         exit(1);
     }
     
-    UArray2_T* arr = Uarray2_new(pgmData.height, pgmData.width, sizeof(int));
+    UArray2_T* arr = Uarray2_new(pgmData.width, pgmData.height,  sizeof(int));
     int len = arr->width * arr->height;
-    printf("height: %d width: %d\n", pgmData.height, pgmData.width);
     for (int i = 0; i < len; ++i){
-        int r = i / 9;
-        int c = i % 9;
-        printf("row: %d column: %d\n", r,c);
+        int r = i / pgmData.height;
+        int c = i % pgmData.width;
         int pixel = (int) Pnmrdr_get(pgmReader);
-        printf("pixel: %d\n", pixel);
         int* e = UArray2_get(arr, r, c);
         *e = pixel;
     }
-    Pnmrdr_free(pgmReader);
+    //Pnmrdr_free(pgmReader);
 
     return arr;
 }
