@@ -3,10 +3,9 @@
 #include "bit2.h"
 #include "queue.h"
 
-int Bit2_unblack_edges(Bit2_T* bit2);
-int isInBounds(int row, int col, int height, int width);
+void unblackEdges(Bit2_T* bit2);
 void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col);
-
+int isInBounds(int row, int col, int height, int width);
 
 /*
 void testQueue(){
@@ -42,6 +41,8 @@ int main(int argc, char** argv){
     Bit2_T* bit2 = pbmread(input);
     fclose(input);
 
+    unblackEdges(bit2);
+
     Bit2_print(bit2);
     Bit2_free(bit2);
     return 0;
@@ -50,7 +51,7 @@ int main(int argc, char** argv){
 // can be given a starting row and column of a black edge or NULL if one is not known
 // similar to a path finding algorithm, the function follows the black edges
 // of the image, and flips the bit to remove the black pixel
-int Bit2_unblack_edges(Bit2_T* bit2){
+void unblackEdges(Bit2_T* bit2){
     
     int height = Bit2_getHeight(bit2);
     int width = Bit2_getWidth(bit2);
@@ -89,7 +90,6 @@ int Bit2_unblack_edges(Bit2_T* bit2){
     }
 
     Queue_free(q);
-    return 0;
 }
 
 void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
