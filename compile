@@ -44,7 +44,7 @@ case $link in
 esac
 
 case $link in
-  all|unblackedges)    $CC $FLAGS $LFLAGS -o unblackedges unblackedges.o bit2.o -lpnmrdr $LIBS 
+  all|unblackedges)    $CC $FLAGS $LFLAGS -o unblackedges unblackedges.o bit2.o queue.o -lpnmrdr $LIBS 
                   linked=yes ;;
 esac
 

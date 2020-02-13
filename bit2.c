@@ -102,6 +102,7 @@ void Bit2_print(Bit2_T* bit2){
             printf("%d", bit);
         }
     }
+    printf("\n");
 }
 
 
