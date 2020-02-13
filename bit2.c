@@ -29,6 +29,14 @@ void Bit2_free(Bit2_T* bit2){
     free(bit2);
 }
 
+int Bit2_getHeight(Bit2_T* bit2){
+    return bit2->height;
+}
+
+int Bit2_getWidth(Bit2_T* bit2){
+    return bit2->width;
+}
+
 int Bit2_get(Bit2_T* bit2, int row, int column){
     
     Bit_T *bitv = Array_get(bit2->arr, row);

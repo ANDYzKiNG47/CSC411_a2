@@ -20,6 +20,12 @@ Bit2_T* Bit2_new(int width, int height);
 // then frees array
 void Bit2_free(Bit2_T* bit2);
 
+// returns height of Bit2_T
+int Bit2_getHeight(Bit2_T* bit2);
+
+// returns width of Bit2_T
+int Bit2_getWidth(Bit2_T* bit2);
+
 // returns the value of a bit at (row, column)
 int Bit2_get(Bit2_T* bit2, int row, int column);
 
