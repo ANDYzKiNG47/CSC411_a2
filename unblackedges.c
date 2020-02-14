@@ -3,13 +3,20 @@
 #include "bit2.h"
 #include "queue.h"
 
+/*
+*
+* implementation to remove black edges from scanned images
+* created by Andrew Zelano and Isaac Pontarelli 2/14/2020
+*
+*/
+
+
 void unblackEdges(Bit2_T* bit2);
 void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col);
 int isInBounds(int row, int col, int height, int width);
 
 int main(int argc, char** argv){
     
-    //testQueue(); 
     FILE* input; 
     if (argc == 2){
         input = fopen(argv[1], "r");
@@ -20,11 +27,15 @@ int main(int argc, char** argv){
         fprintf(stderr, "Error: Invalid arguments");
         exit(1);
     }
+
+    // read file into 2d bit array
     Bit2_T* bit2 = pbmread(input);
     fclose(input);
 
+    // remove black edges
     unblackEdges(bit2);
 
+    // print out and free 2d bit array
     Bit2_print(bit2);
     Bit2_free(bit2);
     return 0;
@@ -74,6 +85,7 @@ void unblackEdges(Bit2_T* bit2){
     Queue_free(q);
 }
 
+// explores given connected blob of black edge and flips the bits to white
 void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
     
     int offset_x[4] = {1, 0 , -1, 0};
@@ -117,6 +129,7 @@ void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
     }
 }
 
+// test whether given index is in bounds of image
 int isInBounds(int row, int col, int height, int width){
 
     if (row < 0 || col < 0 || row >= height || col >= width)

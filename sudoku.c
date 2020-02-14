@@ -2,7 +2,16 @@
 #include <stdlib.h>
 #include "uarray2.h"
 
+/*
+*
+* implementation for the a sudoku solution checker
+* created by Andrew Zelano and Isaac Pontarelli 2/14/2020
+*	
+*/
+
+// function to be applied to each element in the sudoku
 void apply(UArray2_T* arr, int row, int col, void* elem, void* cl);
+
 
 int main(int argc, char** argv){
     
@@ -17,11 +26,15 @@ int main(int argc, char** argv){
         fprintf(stderr, "Error: Invalid arguments");
         exit(1);
     }
+    // read file into 2d array
     uarr2 = UArray2_readPGM(input);
     fclose(input);
     int* cl = calloc(10, sizeof(int)*10);
+    // check each row 
     UArray2_map_row_major(uarr2, apply, cl);
+    // check each column
     UArray2_map_col_major(uarr2, apply, cl);
+    // check each 3x3 block
     UArray2_map_block_major(uarr2, apply, cl);
  
     free(cl);
@@ -29,11 +42,14 @@ int main(int argc, char** argv){
 
     return 0;
 }
+
+// sets all ements of array = 0
 void clearArray(int* arr, int size){
     for (int i = 0; i < size; ++i){
         arr[i] = 0;
     }
 }
+
 // first element of cl stores count
 // resets when count == 9 (iterations)
 // exits if any duplicates are found

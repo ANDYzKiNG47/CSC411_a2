@@ -1,0 +1,17 @@
+Created by Andrew Zelano and Isaac Pontarelli
+
+
+One programming technique that we would both like to incorperate over
+the course of the semester would be better use of version control.
+Specifically we would like to take better advantage of branches in
+git. Since we where alternating between platforms and pushing to a
+shared repo there where several points where this became confusing 
+for a short period of time. One of us forgot to pull the latest
+version of the code before making changes and this produced some
+merge errors when it was caught. We have both used branches in the
+past however the practice will be good too.
+
+If we do this correctly it will also allow us to compartmentalize
+different parts of the code creation. This way if a we find that
+something we are trying to implement will not work it will be much
+easier to revert back to a working version.
