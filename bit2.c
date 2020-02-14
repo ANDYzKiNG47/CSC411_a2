@@ -89,12 +89,12 @@ Bit2_T* pbmread(FILE* input){
     }
 
     Bit2_T* bit2 = Bit2_new(pgmData.width, pgmData.height);
-    int len = pgmData.width * pgmData.height;
-    for (int i = 0; i < len; ++i){
-        int r = i / (pgmData.height-1);
-        int c = i % pgmData.width;
-        int pixel = (int) Pnmrdr_get(pgmReader);
-	Bit2_put(bit2, r, c, pixel);
+
+    for (int i = 0; i < (int) pgmData.height; ++i){
+        for (int j = 0; j < (int) pgmData.width; ++j){
+            int pixel = (int) Pnmrdr_get(pgmReader);
+            Bit2_put(bit2, i, j, pixel);
+        }
     }
     Pnmrdr_free(&pgmReader);
 
