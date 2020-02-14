@@ -53,7 +53,9 @@ void Queue_append(Queue* q, int* elem){
 int* Queue_pop(Queue* q){
     if (q->head == NULL)
         return NULL;
-
+    if (q->head == q->tail){
+        q->tail = NULL;
+    }
     Node* temp = q->head;
     q->head = q->head->next;
     int* elem = temp->elem;

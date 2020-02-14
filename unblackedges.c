@@ -7,27 +7,9 @@ void unblackEdges(Bit2_T* bit2);
 void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col);
 int isInBounds(int row, int col, int height, int width);
 
-/*
-void testQueue(){
-    Queue* q = Queue_new();
-    for (int i = 0; i < 5; ++i){
-        int* temp = malloc(sizeof(int)*2);
-        temp[0] = i;
-        temp[1] = i+1;
-        Queue_append(q, temp);
-    }
-    int* elem;
-    while(Queue_getHead(q) != NULL){
-        elem = Queue_pop(q);
-        printf("( %d , %d )\n", elem[0], elem[1]);
-        free(elem);
-    }
-    Queue_free(q);
-}
-*/
-
 int main(int argc, char** argv){
     
+    //testQueue(); 
     FILE* input; 
     if (argc == 2){
         input = fopen(argv[1], "r");
@@ -103,7 +85,9 @@ void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
     elem[0] = row;
     elem[1] = col;
     Queue_append(q, elem);
-    
+    // flip the bit of the initial element
+    Bit2_put(bit2, elem[0], elem[1], 0);
+
     // loop until no more black pixel neighbors are found
     int finished = 0;
     while (!finished){
@@ -113,8 +97,6 @@ void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
             finished = 1;
             break;
         }
-        // flip the bit
-        Bit2_put(bit2, elem[0], elem[1], 0);
         // if neighbors are a black pixel, add them to queue
         for (int i = 0; i < 4; ++i){
             int neigh_row = elem[0] + offset_y[i];
@@ -125,6 +107,8 @@ void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
                     int* new_elem = malloc(sizeof(int)*2);
                     new_elem[0] = neigh_row;
                     new_elem[1] = neigh_col;
+                    // flip the bit
+                    Bit2_put(bit2, new_elem[0], new_elem[1], 0);
                     Queue_append(q, new_elem);
                 }
             }
