@@ -31,7 +31,7 @@ Uarray2 Checklist:
 step [<-] does it represent?* 
 	* the NULL pointer represents an empty image
 	* a nonnull pointer p represents a bitmap image
-    * Invarient: Demensions of the Uarray2_T will never change after initialized or until freed
+    * Invarient: Demensions of the Uarray2\_T will never change after initialized or until freed
 - [ ] *What test cases have you devised?*
 	* Test cases are left as an exercise in creativity for the reader
 - [ ] *What programming idioms will you need?*

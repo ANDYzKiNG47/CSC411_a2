@@ -1,0 +1,8 @@
+Created by Andrew Zelano and Isaac Pontarelli 2/14/2020
+
+The implementations are fully working to the best of our knowlege. We have
+checked for memory leaks using valgrind and found none. We have also verified
+the correctness of the output using the test cases provided and some of our 
+own.
+
+We spent approximately 13 hours working on this assignment.
