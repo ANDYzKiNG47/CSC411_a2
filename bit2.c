@@ -23,6 +23,7 @@ Bit2_T* Bit2_new(int width, int height){
     // outer array
     bit->arr = Array_new(height, sizeof(Bit_T*));
     // inner bit vectors
+    // invariant: every index to the left of i contains a bit vector
     for (int i = 0; i < height; ++i){
         Bit_T* p = Array_get(bit->arr, i);
         *p = Bit_new(width);
@@ -34,6 +35,7 @@ Bit2_T* Bit2_new(int width, int height){
 void Bit2_free(Bit2_T* bit2){
     
     // free inner bit vecots
+    // invariant: every index to the left of i will be empty
     for (int i = 0; i < bit2->height; ++i){
         Bit_T* p = Array_get(bit2->arr, i);
         Bit_free(p);
@@ -70,8 +72,10 @@ void Bit2_put(Bit2_T* bit2, int row, int column, int value){
 // apply a function to each element in the 2d array in row major order
 void Bit2_map_row_major(Bit2_T* bit2, apply_func apply, void* cl){
 
+    // invariant: every array above i will have every element in it passed to the apply function
     for (int i = 0; i < bit2->height; ++i){
         Bit_T bitv = Array_get(bit2->arr, i);
+        // invariant: every element to the left of j will have been passed to apply function
         for (int j = 0; j < bit2->width; ++j){
             int bit = Bit_get(bitv, j);
             apply(i, j, bit, cl);
@@ -111,7 +115,9 @@ Bit2_T* pbmread(FILE* input){
     Bit2_T* bit2 = Bit2_new(pgmData.width, pgmData.height);
     
     // read each "pixel" into the 2d array
+    // invariant: every array above i will have a pixel value in each index
     for (int i = 0; i < (int) pgmData.height; ++i){
+        // invariant: every element to the left of j will have a pixel value stored in it
         for (int j = 0; j < (int) pgmData.width; ++j){
             int pixel = (int) Pnmrdr_get(pgmReader);
             Bit2_put(bit2, i, j, pixel);

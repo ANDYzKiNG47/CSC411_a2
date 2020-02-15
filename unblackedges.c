@@ -51,6 +51,7 @@ void unblackEdges(Bit2_T* bit2){
     Queue* q = Queue_new();
     
     // iterate through top of image
+    // invariant: every edge pixel to the left of j will be checked / white
     for (int j = 0; j < width; ++j){
         int pixel = Bit2_get(bit2, 0, j);
         if (pixel == 1){
@@ -59,6 +60,7 @@ void unblackEdges(Bit2_T* bit2){
     }
     
     // iterate through right side of image
+    // invariant: every edge pixel above row i is checked / white
     for (int i = 0; i < height; ++i){
         int pixel = Bit2_get(bit2, i, width-1);
         if (pixel == 1){
@@ -67,6 +69,7 @@ void unblackEdges(Bit2_T* bit2){
     }
 
     // iterate through bottom of image
+    // invariant: every edge pixel to the left of j is checked / white
     for (int j = 0; j < width; ++j){
         int pixel = Bit2_get(bit2, height-1, j);
         if (pixel == 1){
@@ -74,7 +77,8 @@ void unblackEdges(Bit2_T* bit2){
         }
     }
 
-    // iterate through left side of image 
+    // iterate through left side of image
+    // invariant: every edge pixel above row i will be checked / white
     for (int i = 0; i < height; ++i){
         int pixel = Bit2_get(bit2, i, 0);
         if (pixel == 1){
@@ -101,6 +105,7 @@ void removeBlackEdge(Bit2_T* bit2, Queue* q, int row, int col){
     Bit2_put(bit2, elem[0], elem[1], 0);
 
     // loop until no more black pixel neighbors are found
+    // invariant: any pixels that are in the que are part of a black edge
     int finished = 0;
     while (!finished){
         elem = Queue_pop(q);

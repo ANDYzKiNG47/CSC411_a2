@@ -45,6 +45,7 @@ int main(int argc, char** argv){
 
 // sets all ements of array = 0
 void clearArray(int* arr, int size){
+    // invariant: any element to the left of i has a value of 0
     for (int i = 0; i < size; ++i){
         arr[i] = 0;
     }
